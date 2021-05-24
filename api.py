@@ -27,5 +27,20 @@ def home():
 def employee_all():
   return jsonify(fakeDbData)
 
+@app.route('/api/v1/employee', methods=['GET'])
+def employee_code():
+  if 'code' in request.args:
+    code = int(request.args['code'])
+  else:
+    return "Error: No CODE field provided. Please specify it using ?code=desiredEmployeeCode"
+  
+  results = []
+
+  for employee in fakeDbData:
+    if employee['code'] == code:
+      results.append(employee)
+
+  return jsonify(results)
+
 
 app.run()
