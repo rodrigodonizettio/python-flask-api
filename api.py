@@ -1,23 +1,19 @@
 import flask
 from flask import request, jsonify
 
+import mysql.connector
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 
-fakeDbData = [
-  {
-    'id': 1,
-    'code': 1312,
-    'name': 'Rodrigo Donizetti'
-  },
-  {
-    'id': 2,
-    'code': 1313,
-    'name': 'Rodrigo Vimieiro'
-  },
-]
+# MySQL
+employeeDb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="python",
+  database="company"
+)
 
 @app.route('/', methods=['GET'])
 def home():
