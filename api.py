@@ -42,9 +42,13 @@ def employee_code():
   
   results = []
 
-  for employee in fakeDbData:
-    if employee['code'] == code:
-      results.append(employee)
+  employeeCursor = employeeDb.cursor()
+  employeeCursor.execute("%s%d" % ("SELECT * FROM employee WHERE code = ", code))
+
+  mysqlRes = employeeCursor.fetchall()
+
+  for e in mysqlRes:
+    results.append(e)
 
   return jsonify(results)
 
