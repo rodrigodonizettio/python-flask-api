@@ -21,7 +21,17 @@ def home():
 
 @app.route('/api/v1/employee/all', methods=['GET'])
 def employee_all():
-  return jsonify(fakeDbData)
+  results = []
+
+  employeeCursor = employeeDb.cursor()
+  employeeCursor.execute("SELECT * FROM employee")
+
+  mysqlRes = employeeCursor.fetchall()
+
+  for e in mysqlRes:
+    results.append(e)
+
+  return jsonify(results)
 
 @app.route('/api/v1/employee', methods=['GET'])
 def employee_code():
