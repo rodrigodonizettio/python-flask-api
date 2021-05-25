@@ -3,6 +3,7 @@ from flask import request, jsonify
 
 import mysql.connector
 
+# App configs.
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
@@ -15,9 +16,10 @@ employeeDb = mysql.connector.connect(
   database="company"
 )
 
+# API Endpoints
 @app.route('/', methods=['GET'])
 def home():
-  return "<h1>Hello Flask API!</h1><h3>To retrieve DB Data try /api/v1/employee/all </h3>"
+  return "<h1>Hello Flask API!</h1><h3>To retrieve All DB Data try /api/v1/employee/all </h3><h3>To retrieve DB Data by Code try /api/v1/employee?code=1312 </h3>"
 
 @app.route('/api/v1/employee/all', methods=['GET'])
 def employee_all():
